@@ -5,16 +5,18 @@ echo.
 echo This process is mostly automatic, however some steps may give prompts 
 echo that you'll need to follow to complete the installation.
 echo.
+echo Note: This will install mods and files to a non-standard location to avoid conflicts
+echo with other Minecraft versions. This means you will NEED to use a custom launcher profile.
+echo A tutorial is included at the end of this setup process.
 pause
-
-
 
 cls
 echo Progress: ---------- 1%
 echo Setting up directories...
 
 if not exist "C:\Modded Minecraft" mkdir "C:\Modded Minecraft"
-if not exist "C:\Modded Minecraft\TheLV" mkdir "C:\Modded Minecraft\TheLV"
+if not exist "C:\Modded Minecraft\Java" mkdir "C:\Modded Minecraft\Java"
+if not exist "C:\Modded Minecraft\TheLV" mkdir "C:\Modded Minecraft\TheLV" & set NEW=y
 if not exist "C:\Modded Minecraft\TheLV\mods" mkdir "C:\Modded Minecraft\TheLV\mods"
 if exist "C:\Modded Minecraft\TheLV\1.0a" call:upToDate
 :return
@@ -51,28 +53,60 @@ cls
 echo Progress: ==-------- 25%
 echo Installing Minecraft Forge 40.1.0...
 
-start /W /min "C:\Modded Minecraft\setup-temp\gitclone\java\JDK17\bin\javaw.exe" -jar "C:\Modded Minecraft\setup-temp\resources\ForgeCLI-1.0.1.jar" --installer "C:\Modded Minecraft\setup-temp\resources\forge-1.18.2-40.1.0-installer.jar" --target "C:\Modded Minecraft\TheLV"
+if not exist "%appdata%\.minecraft\versions\1.18.2-forge-40.1.0" start /W /min "Installing Forge..." "C:\Modded Minecraft\setup-temp\gitclone\java\JDK17\bin\javaw.exe" -jar "C:\Modded Minecraft\setup-temp\gitclone\resources\ForgeCLI-1.0.1.jar" --installer "C:\Modded Minecraft\setup-temp\gitclone\resources\forge-1.18.2-40.1.0-installer.jar" --target "%appdata%\.minecraft" & set FUP=y
 
 cls
-echo Progress: ===------- 40%
+echo Progress: ====------ 40%
 echo Copying mods...
 
-xcopy /s/e "C:\Modded Minecraft\setup-temp\gitclone\mods" "C:\Modded Minecraft\TheLV\mods"
+start /W /min "Copying mods..." xcopy /s/e/y "C:\Modded Minecraft\setup-temp\gitclone\mods" "C:\Modded Minecraft\TheLV\mods"
 
 cls
-echo Progress: ===------- 75%
+echo Progress: =======--- 75%
 echo Finishing up...
 
+if not exist "C:\Modded Minecraft\Java\JDK17" mkdir "C:\Modded Minecraft\Java\JDK17"
+start /W /min "Copying Java..." xcopy /s/e/y "C:\Modded Minecraft\setup-temp\gitclone\java\JDK17" "C:\Modded Minecraft\Java\JDK17"
+if not exist "C:\Modded Minecraft\Launcher Profile Tutorial.txt" start /W /min "Copying Tutorial..." xcopy /s/e/y "C:\Modded Minecraft\setup-temp\gitclone\resources\Launcher Profile Tutorial.txt" "C:\Modded Minecraft\Launcher Profile Tutorial.txt"
 call:cleanSetup
-"">"C:\Modded Minecraft\TheLV\1.0a"
+echo "ModPack version 1.0a - identifier">"C:\Modded Minecraft\TheLV\1.0a"
 
+cls
+echo Progress: ========== 100%
+echo Done!
+echo.
+if %FUP%==y call:howLauncher
+if %NEW%==y call:howLauncher
+echo Do you need help setting up the Minecraft Launcher Profile? (Usually only for first time setup)
+set /p ANSWER=(y/n):
+if %ANSWER%==y call:howLauncher
 pause
-exit /b
+exit
 
 :upToDate
 echo It appears the installed version of the ModPack is up to date, would you like to continue?
 set /p ANSWER=(y/n):
-if %ANSWER%==n exit else call:return
+if %ANSWER%==n exit
+call:return
+
+:howLauncher
+cls
+if %FUP%==y call:updateFOnly
+setlocal
+for /f "tokens=2* delims=:" %%a in ('systeminfo ^| findstr /I /C:"Total Physical Memory"') do set TotalRAM=%%a
+set "str=%TotalRAM%"
+cls
+echo A document with a tutorial on making the necessary Minecraft launcher profile will now open.
+echo For reference, your PC's total ram is: %TotalRAM%
+"C:\Modded Minecraft\Launcher Profile Tutorial.txt"
+pause
+exit
+
+:updateFOnly
+echo It looks like the Forge version needs to be updated in the Minecraft Launcher.
+echo In the Installations tab, select your TheLV profile and set the version to release 1.18.2-forge-40.1.0.
+pause
+exit
 
 :cleanSetup
 rmdir /S/Q "C:\Modded Minecraft\setup-temp"
