@@ -1,1 +1,28 @@
-YEERT
+Follow these steps to make the custom launcher profile needed:
+
+1. Open the Minecraft launcher and go to the "Installations" tab at the top
+2. Click "New installation"
+2.5 OPTIONAL: Select an icon from the drop down list by clicking on the default Furnace icon
+3. For the NAME, enter TheLV
+4. for the VERSION, select "release 1.18.2-forge-40.1.0" from the drop down list
+5. For GAME DIRECTORY, copy and paste the following: "C:\Modded Minecraft\TheLV"
+6. Click MORE OPTIONS in the bottom right
+7. For JAVA EXECUTABLE, copy and paste the following: "C:\Modded Minecraft\Java\JDK17\bin\javaw.exe"
+8. For JVM ARGUMENTS, set the -Xmx2G based on the following table and your PC's RAM ammount given by the ModPack installer:
+
+If your PC has ?MB of RAM | Set -Xmx?G
+          4GB / 4,000+ MB | -Xmx2G
+          8GB / 8,000+ MB | -Xmx4G
+        12GB / 12,000+ MB | -Xmx8G
+        16GB / 16,000+ MB | -Xmx10G
+        24GB / 24,000+ MB | -Xmx14G
+        32GB / 32,000+ MB | -Xmx16G
+
+Note: For Minecraft versions 1.13 and below, do not set higher than -Xmx12G
+Note: For Minecraft versions 1.14 and higher, do not set higher than -Xmx16G
+
+Setting this value tells Minecraft how much of your system memory it can use,
+but allocating too much can actually be harmful as the code is not intended to deal with that much.
+
+9. Click create in the bottom right corner
+10. Select the profile and click play!
