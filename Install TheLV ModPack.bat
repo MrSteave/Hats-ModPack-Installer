@@ -51,7 +51,7 @@ mkdir "C:\Modded Minecraft\setup-temp\gitclone"
 
 cls
 echo Progress: ==-------- 25%
-echo Installing Minecraft Forge 40.1.0...
+echo Installing Minecraft Forge 40.1.0 - This may take some time...
 
 if not exist "%appdata%\.minecraft\versions\1.18.2-forge-40.1.0" start /W /min "Installing Forge..." "C:\Modded Minecraft\setup-temp\gitclone\java\JDK17\bin\javaw.exe" -jar "C:\Modded Minecraft\setup-temp\gitclone\resources\ForgeCLI-1.0.1.jar" --installer "C:\Modded Minecraft\setup-temp\gitclone\resources\forge-1.18.2-40.1.0-installer.jar" --target "%appdata%\.minecraft" & set FUP=y
 
@@ -63,11 +63,12 @@ start /W /min "Copying mods..." xcopy /s/e/y "C:\Modded Minecraft\setup-temp\git
 
 cls
 echo Progress: =======--- 75%
-echo Finishing up...
+echo Copying Java and finishing up...
 
 if not exist "C:\Modded Minecraft\Java\JDK17" mkdir "C:\Modded Minecraft\Java\JDK17"
+if not exist "C:\Modded Minecraft\Tutorial" mkdir "C:\Modded Minecraft\Tutorial"
 start /W /min "Copying Java..." xcopy /s/e/y "C:\Modded Minecraft\setup-temp\gitclone\java\JDK17" "C:\Modded Minecraft\Java\JDK17"
-if not exist "C:\Modded Minecraft\Launcher Profile Tutorial.txt" start /W /min "Copying Tutorial..." xcopy /s/e/y "C:\Modded Minecraft\setup-temp\gitclone\resources\Launcher Profile Tutorial.txt" "C:\Modded Minecraft\Launcher Profile Tutorial.txt"
+if not exist "C:\Modded Minecraft\Tutorial\Launcher Profile Tutorial.txt" start /W /min "Copying Tutorial..." xcopy /s/e/y "C:\Modded Minecraft\setup-temp\gitclone\resources\Tutorial" "C:\Modded Minecraft\Tutorial"
 call:cleanSetup
 echo "ModPack version 1.0a - identifier">"C:\Modded Minecraft\TheLV\1.0a"
 
@@ -75,8 +76,8 @@ cls
 echo Progress: ========== 100%
 echo Done!
 echo.
-if %FUP%==y call:howLauncher
-if %NEW%==y call:howLauncher
+if %FUP%=="" echo else call:howLauncher
+if %NEW%=="" echo else call:howLauncher
 echo Do you need help setting up the Minecraft Launcher Profile? (Usually only for first time setup)
 set /p ANSWER=(y/n):
 if %ANSWER%==y call:howLauncher
