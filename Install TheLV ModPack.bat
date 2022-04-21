@@ -62,9 +62,9 @@ echo Progress: ======---- 61%%
 echo Copying mods...
 
 rmdir /s /q "C:\Modded Minecraft\TheLV\mods"
-start /W /min "Copying mods..." xcopy /s/e/y "C:\Modded Minecraft\setup-temp\gitclone\mods" "C:\Modded Minecraft\TheLV\mods"
+start /W /min "Copying mods..." xcopy /s/e/y/i "C:\Modded Minecraft\setup-temp\gitclone\mods" "C:\Modded Minecraft\TheLV\mods"
 rmdir /s /q "C:\Modded Minecraft\TheLV\configs"
-start /W /min "Copying configs..." xcopy /s/e/y "C:\Modded Minecraft\setup-temp\gitclone\configs" "C:\Modded Minecraft\TheLV\configs"
+start /W /min "Copying configs..." xcopy /s/e/y/i "C:\Modded Minecraft\setup-temp\gitclone\configs" "C:\Modded Minecraft\TheLV\configs"
 
 cls
 echo Progress: ========-- 88%%
@@ -72,7 +72,7 @@ echo Copying Java and finishing up...
 
 if not exist "C:\Modded Minecraft\Java\JDK17" mkdir "C:\Modded Minecraft\Java\JDK17"
 if not exist "C:\Modded Minecraft\Tutorial" mkdir "C:\Modded Minecraft\Tutorial"
-start /W /min "Copying Java..." xcopy /s/e/y "C:\Modded Minecraft\setup-temp\gitclone\java\JDK17" "C:\Modded Minecraft\Java\JDK17"
+start /W /min "Copying Java..." xcopy /s/e/y/i "C:\Modded Minecraft\setup-temp\gitclone\java\JDK17" "C:\Modded Minecraft\Java\JDK17"
 if not exist "C:\Modded Minecraft\Tutorial\Launcher Profile Tutorial.txt" start /W /min "Copying Tutorial..." xcopy /s/e/y "C:\Modded Minecraft\setup-temp\gitclone\resources\Tutorial" "C:\Modded Minecraft\Tutorial"
 call:cleanSetup
 echo "ModPack version %ver% - identifier">"C:\Modded Minecraft\TheLV\%ver%"
