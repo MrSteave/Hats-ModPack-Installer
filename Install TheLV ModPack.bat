@@ -16,10 +16,9 @@ echo Setting up directories...
 
 if not exist "C:\Modded Minecraft" mkdir "C:\Modded Minecraft"
 if not exist "C:\Modded Minecraft\Java" mkdir "C:\Modded Minecraft\Java"
-if not exist "C:\Modded Minecraft\TheLV" mkdir "C:\Modded Minecraft\TheLV" & set NEW=y
+if not exist "C:\Modded Minecraft\TheLV" mkdir "C:\Modded Minecraft\TheLV"
 if not exist "C:\Modded Minecraft\TheLV\mods" mkdir "C:\Modded Minecraft\TheLV\mods"
-if exist "C:\Modded Minecraft\TheLV\1.0a" call:upToDate
-:return
+if not exist "C:\Modded Minecraft\TheLV\configs" mkdir "C:\Modded Minecraft\TheLV\configs"
 
 cls
 echo Progress: ---------- 2%%
@@ -48,6 +47,9 @@ echo.
 
 mkdir "C:\Modded Minecraft\setup-temp\gitclone"
 "C:\Modded Minecraft\setup-temp\PortableGit\cmd\git.exe" clone -b TheLV --single-branch https://github.com/MrSteave/Hats-ModPack-Installer "C:\Modded Minecraft\setup-temp\gitclone"
+set /p ver=<"C:\Modded Minecraft\setup-temp\gitclone\resources\version.txt"
+if exist "C:\Modded Minecraft\TheLV\%ver%" call:upToDate
+:return
 
 cls
 echo Progress: ===------- 36%%
@@ -59,7 +61,10 @@ cls
 echo Progress: ======---- 61%%
 echo Copying mods...
 
+rmdir /s /q "C:\Modded Minecraft\TheLV\mods"
 start /W /min "Copying mods..." xcopy /s/e/y "C:\Modded Minecraft\setup-temp\gitclone\mods" "C:\Modded Minecraft\TheLV\mods"
+rmdir /s /q "C:\Modded Minecraft\TheLV\configs"
+start /W /min "Copying configs..." xcopy /s/e/y "C:\Modded Minecraft\setup-temp\gitclone\configs" "C:\Modded Minecraft\TheLV\configs"
 
 cls
 echo Progress: ========-- 88%%
@@ -70,7 +75,7 @@ if not exist "C:\Modded Minecraft\Tutorial" mkdir "C:\Modded Minecraft\Tutorial"
 start /W /min "Copying Java..." xcopy /s/e/y "C:\Modded Minecraft\setup-temp\gitclone\java\JDK17" "C:\Modded Minecraft\Java\JDK17"
 if not exist "C:\Modded Minecraft\Tutorial\Launcher Profile Tutorial.txt" start /W /min "Copying Tutorial..." xcopy /s/e/y "C:\Modded Minecraft\setup-temp\gitclone\resources\Tutorial" "C:\Modded Minecraft\Tutorial"
 call:cleanSetup
-echo "ModPack version 1.0a - identifier">"C:\Modded Minecraft\TheLV\1.0a"
+echo "ModPack version %ver% - identifier">"C:\Modded Minecraft\TheLV\%ver%"
 
 cls
 echo Progress: ========== 100%%
