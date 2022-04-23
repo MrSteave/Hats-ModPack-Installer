@@ -1,4 +1,5 @@
 @ECHO off
+setlocal enableextensions enabledelayedexpansion
 title "Hat's Modpack Installer - TheLV"
 echo -= Welcome to TheLV's ModPack installer! =-
 echo.
@@ -67,13 +68,22 @@ rmdir /s /q "C:\Modded Minecraft\TheLV\configs"
 start /W /min "Copying configs..." xcopy /s/e/y/i "C:\Modded Minecraft\setup-temp\gitclone\configs" "C:\Modded Minecraft\TheLV\configs"
 
 cls
-echo Progress: ========-- 88%%
-echo Copying Java and finishing up...
+echo Progress: =======--- 79%%
+echo Copying Java...
 
 if not exist "C:\Modded Minecraft\Java\JDK17" mkdir "C:\Modded Minecraft\Java\JDK17"
-if not exist "C:\Modded Minecraft\Tutorial" mkdir "C:\Modded Minecraft\Tutorial"
 start /W /min "Copying Java..." xcopy /s/e/y/i "C:\Modded Minecraft\setup-temp\gitclone\java\JDK17" "C:\Modded Minecraft\Java\JDK17"
-if not exist "C:\Modded Minecraft\Tutorial\Launcher Profile Tutorial.txt" start /W /min "Copying Tutorial..." xcopy /s/e/y "C:\Modded Minecraft\setup-temp\gitclone\resources\Tutorial" "C:\Modded Minecraft\Tutorial"
+wmic ComputerSystem get TotalPhysicalMemory >"C:\Modded Minecraft\setup-temp\output.txt"
+more +1 "C:\Modded Minecraft\setup-temp\output.txt" > "C:\Modded Minecraft\setup-temp\output2.txt"
+set /p RAM=<"C:\Modded Minecraft\setup-temp\output2.txt"
+
+cls
+echo Progress: ========-- 88%%
+echo Finishing up...
+
+
+if %RAM% GTR 8000000000 (if %RAM% GTR 12000000000 (if %RAM% GTR 16000000000 (if %RAM% GTR 24000000000 call:copy16) else call:copy12) else call:copy8) else call:copy5
+:returnRAM
 call:cleanSetup
 echo "ModPack version %ver% - identifier">"C:\Modded Minecraft\TheLV\%ver%"
 
@@ -81,12 +91,25 @@ cls
 echo Progress: ========== 100%%
 echo Done!
 echo.
-echo Do you need help setting up the Minecraft Launcher Profile? (Usually only for first time setup)
-set /p ANSWER=(y/n):
-if %ANSWER%==y call:howLauncher
-if %FUP%==y call:updateForge
 pause
 exit
+
+:copy16
+start /W /min "Copying Launcher Profile..." xcopy /s/e/y "C:\Modded Minecraft\setup-temp\gitclone\resources\Profiles\TheLV\16.json" "%APPDATA%\.minecraft\launcher_profiles.json"
+call:returnRAM
+
+:copy12
+start /W /min "Copying Launcher Profile..." xcopy /s/e/y "C:\Modded Minecraft\setup-temp\gitclone\resources\Profiles\TheLV\12.json" "%APPDATA%\.minecraft\launcher_profiles.json"
+call:returnRAM
+
+:copy8
+start /W /min "Copying Launcher Profile..." xcopy /s/e/y "C:\Modded Minecraft\setup-temp\gitclone\resources\Profiles\TheLV\8.json" "%APPDATA%\.minecraft\launcher_profiles.json"
+call:returnRAM
+
+:copy5
+start /W /min "Copying Launcher Profile..." xcopy /s/e/y "C:\Modded Minecraft\setup-temp\gitclone\resources\Profiles\TheLV\5.json" "%APPDATA%\.minecraft\launcher_profiles.json"
+call:returnRAM
+
 
 :upToDate
 echo It appears the installed version of the ModPack is up to date, would you like to continue?

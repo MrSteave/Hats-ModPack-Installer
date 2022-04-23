@@ -1,0 +1,45 @@
+{
+  "profiles" : {
+    "36715deb6af7119abad7e9d4268b76fc" : {
+      "created" : "2022-04-21T21:41:46.418Z",
+      "gameDir" : "C:\\Modded Minecraft\\TheLV",
+      "icon" : "Enchanting_Table",
+      "javaArgs" : "-Xmx16G -XX:+UnlockExperimentalVMOptions -XX:+UseG1GC -XX:G1NewSizePercent=20 -XX:G1ReservePercent=20 -XX:MaxGCPauseMillis=50 -XX:G1HeapRegionSize=32M",
+      "javaDir" : "C:\\Modded Minecraft\\Java\\JDK17\\bin\\javaw.exe",
+      "lastUsed" : "2022-04-21T23:15:01.655Z",
+      "lastVersionId" : "1.18.2-forge-40.1.0",
+      "name" : "TheLV",
+      "type" : "custom"
+    },
+    "5383c915b36fcf869b561c654f3410bd" : {
+      "icon" : "Crafting_Table",
+      "javaArgs" : "-Xmx6G -XX:+UnlockExperimentalVMOptions -XX:+UseG1GC -XX:G1NewSizePercent=20 -XX:G1ReservePercent=20 -XX:MaxGCPauseMillis=50 -XX:G1HeapRegionSize=32M",
+      "lastUsed" : "2021-09-23T07:18:21.785Z",
+      "lastVersionId" : "latest-snapshot",
+      "name" : "",
+      "type" : "latest-snapshot"
+    },
+    "6d31000338c7cac49b7bdee2e35767d1" : {
+      "icon" : "Grass",
+      "javaArgs" : "-Xmx4G -Dfml.readTimeout=300 -XX:+UnlockExperimentalVMOptions -XX:+UseG1GC -XX:G1NewSizePercent=20 -XX:G1ReservePercent=20 -XX:MaxGCPauseMillis=50 -XX:G1HeapRegionSize=32M",
+      "lastUsed" : "2021-10-16T17:42:54.315Z",
+      "lastVersionId" : "latest-release",
+      "name" : "",
+      "type" : "latest-release"
+    }
+  },
+  "settings" : {
+    "crashAssistance" : false,
+    "enableAdvanced" : true,
+    "enableAnalytics" : false,
+    "enableHistorical" : true,
+    "enableReleases" : true,
+    "enableSnapshots" : true,
+    "keepLauncherOpen" : false,
+    "profileSorting" : "ByLastPlayed",
+    "showGameLog" : false,
+    "showMenu" : true,
+    "soundOn" : false
+  },
+  "version" : 3
+}
