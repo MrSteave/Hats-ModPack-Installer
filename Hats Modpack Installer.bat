@@ -8,6 +8,7 @@ echo.
 echo Note: This will install mods and files to a non-standard location to avoid conflicts
 echo with other Minecraft versions. This means you will NEED to use a custom launcher profile
 echo provided by this program.
+echo.
 pause
 
 :: Asks user for Modpack choice, sets error level accordingly
@@ -86,22 +87,22 @@ if %mpc%==1 (start /W /min "Copying Java..." xcopy /s/e/y/i "C:\Modded Minecraft
 wmic ComputerSystem get TotalPhysicalMemory >"C:\Modded Minecraft\setup-temp\output.txt"
 more +1 "C:\Modded Minecraft\setup-temp\output.txt" > "C:\Modded Minecraft\setup-temp\output2.txt"
 set /p RAM=<"C:\Modded Minecraft\setup-temp\output2.txt"
-echo %RAM%
 
 :: Copies proper launcher profile json and server list based on chosen modpack(s) and system RAM amount, cleans up temp files and sets modpack versions in storage
 cls
 echo Progress: ========-- 88%%
 echo Finishing up...
-if %RAM% GTR 8000000000 set RC=5
-if %RAM% GTR 8000000000 (if %RAM% GTR 12000000000 set RC=8)
-if %RAM% GTR 8000000000 (if %RAM% GTR 12000000000 (if %RAM% GTR 16000000000 set RC=12))
-if %RAM% GTR 8000000000 (if %RAM% GTR 12000000000 (if %RAM% GTR 16000000000 (if %RAM% GTR 24000000000 set RC=16)))
-if RC == 5 call:copy5
-if RC == 8 call:copy8
-if RC == 12 call:copy12
-if RC == 16 call:copy16
+set RAM=%RAM:~0,-19%
+if %RAM% GTR 8 (set RC=8)
+if %RAM% GTR 8 (if %RAM% GTR 12 (set RC=8))
+if %RAM% GTR 8 (if %RAM% GTR 12 (if %RAM% GTR 16 (set RC=12)))
+if %RAM% GTR 8 (if %RAM% GTR 12 (if %RAM% GTR 16 (if %RAM% GTR 24 (set RC=16))))
+if %RC% == 5 call:copy5
+if %RC% == 8 call:copy8
+if %RC% == 12 call:copy12
+if %RC% == 16 call:copy16
 :returnRAM
-if %mpc%==1 (start /W /min "Copying server list..." xcopy /s/e/y "C:\Modded Minecraft\setup-temp\gitclone\resources\Profiles\TheLV\servers.dat" "C:\Modded Minecraft\TheLV\servers.dat")
+if %mpc%==1 (echo F|start /W /min "Copying server list..." xcopy /s/e/y/f "C:\Modded Minecraft\setup-temp\gitclone\resources\Profiles\TheLV\servers.dat" "C:\Modded Minecraft\TheLV\servers.dat")
 call:cleanSetup
 if %mpc%==1 (echo "ModPack version %ver% - identifier">"C:\Modded Minecraft\TheLV\%ver%")
 
