@@ -15,4 +15,4 @@ This is the universal installer for all ModPacks used by the HMG/RR
 
 
 
-_v0.1a_
+_v2.0.0b_
