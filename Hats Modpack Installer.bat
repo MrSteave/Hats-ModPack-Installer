@@ -65,7 +65,7 @@ if %mpc%==1 (if exist "C:\Modded Minecraft\TheLV\%ver%" call:upToDate)
 cls
 echo Progress: ===------- 36%%
 echo Installing Minecraft Mod Loader - This may take some time...
-if %mpc%==1 (if not exist "%appdata%\.minecraft\versions\1.18.2-forge-40.1.0" start /W /min "Installing Forge..." "C:\Modded Minecraft\setup-temp\gitclone\java\JDK17\bin\javaw.exe" -jar "C:\Modded Minecraft\setup-temp\gitclone\resources\ForgeCLI-1.0.1.jar" --installer "C:\Modded Minecraft\setup-temp\gitclone\resources\forge-1.18.2-40.1.0-installer.jar" --target "%appdata%\.minecraft" & set FUP=y)
+if %mpc%==1 (if not exist "%appdata%\.minecraft\versions\1.18.2-forge-40.1.54" start /W /min "Installing Forge..." "C:\Modded Minecraft\setup-temp\gitclone\java\JDK17\bin\javaw.exe" -jar "C:\Modded Minecraft\setup-temp\gitclone\resources\ForgeCLI-1.0.1.jar" --installer "C:\Modded Minecraft\setup-temp\gitclone\resources\forge-1.18.2-40.1.54-installer.jar" --target "%appdata%\.minecraft" & set FUP=y)
 
 :: Copies mods for chosen modpack(s)
 cls
