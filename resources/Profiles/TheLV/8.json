@@ -7,7 +7,7 @@
       "javaArgs" : "-Xmx8G -XX:+UnlockExperimentalVMOptions -XX:+UseG1GC -XX:G1NewSizePercent=20 -XX:G1ReservePercent=20 -XX:MaxGCPauseMillis=50 -XX:G1HeapRegionSize=32M",
       "javaDir" : "C:\\Modded Minecraft\\Java\\JDK17\\bin\\javaw.exe",
       "lastUsed" : "2022-04-21T23:15:01.655Z",
-      "lastVersionId" : "1.18.2-forge-40.1.54",
+      "lastVersionId" : "1.18.2-forge-40.2.0",
       "name" : "TheLV",
       "type" : "custom"
     },
