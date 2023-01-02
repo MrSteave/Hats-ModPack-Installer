@@ -41,14 +41,14 @@ mkdir "C:\Modded Minecraft\setup-temp"
 cls
 echo Progress: ---------- 3%%
 echo Downloading PortableGit...
-start /W /min "Downloading..." bitsadmin /transfer PortableGit /download /priority FOREGROUND "https://dl.dropboxusercontent.com/s/p41pm6911kl994l/gitsetup.exe" "C:\Modded Minecraft\setup-temp\gitsetup.exe"
+start /W /min "Downloading..." bitsadmin /transfer PortableGit /download /priority FOREGROUND "https://dl.dropboxusercontent.com/s/m6fvnrmbv8hoy5g/PortableGit.exe" "C:\Modded Minecraft\setup-temp\portablegit.exe"
 
 :: Sets up portable Git utility in temporary setup folder
 cls
 echo Progress: ---------- 7%%
 echo Setting up PortableGit...
 mkdir "C:\Modded Minecraft\setup-temp\PortableGit"
-start /W /min "Installing PortableGit" "C:\Modded Minecraft\setup-temp\gitsetup.exe" -d"C:\Modded Minecraft\setup-temp\PortableGit" -s1
+start /W /min "Installing PortableGit" "C:\Modded Minecraft\setup-temp\portablegit.exe" -d"C:\Modded Minecraft\setup-temp\PortableGit" -s1
 
 :: Cloans the master GitHub respository
 cls
